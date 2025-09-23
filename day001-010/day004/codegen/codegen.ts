@@ -8,7 +8,7 @@ function makeCExpr(expr: Expr): string {
       if (expr.op === "+") {
         return makeCExpr(expr.operand);
       } else {
-        return `${expr.op}${makeCExpr(expr.operand)}`;
+        return `(${expr.op}${makeCExpr(expr.operand)})`;
       }
     case "intLit":
       return `${expr.value}`;

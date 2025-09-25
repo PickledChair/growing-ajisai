@@ -32,9 +32,9 @@ export class SyntaxError {
       case "unexpectedToken":
         return `unexpected token: expected \`${info.expected}\`, but got \`${info.got.tag}\``;
       case "rhsNotFound":
-        return "binary expression has no right-hand operand";
+        return "binary expression has no valid right-hand operand";
       case "unaryOperandNotFound":
-        return "unary expression has no operand";
+        return "unary expression has no valid operand";
       case "unreachable":
         return "unreachable (maybe compiler's bug)";
     }

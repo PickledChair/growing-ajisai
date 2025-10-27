@@ -1,7 +1,7 @@
 import { Span, spanToString } from "../parser/mod.ts";
 
 export type SemantErrorInfo =
-  { errorKind: "valueError", tag: "tooLargeIntLiteral" }
+  { tag: "literalOutOfRange" };
 
 export class SemantError {
   constructor(
@@ -11,18 +11,13 @@ export class SemantError {
 
   private message1(): string {
     const info = this.errorInfo;
-    switch (info.errorKind) {
-      case "valueError": {
-        const errKind = "value error: ";
-        switch (info.tag) {
-          case "tooLargeIntLiteral":
-            return errKind + "integer literal is too large";
-        }
-      }
+    switch (info.tag) {
+      case "literalOutOfRange":
+        return "literal out of range for `int`";
     }
   }
 
   message(): string {
-    return `${spanToString(this.span)}\n${this.message1()}`;
+    return `${spanToString(this.span)}\nsemantic error: ${this.message1()}`;
   }
 }

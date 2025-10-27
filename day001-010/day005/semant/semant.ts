@@ -56,5 +56,5 @@ function analyzeInteger(value: string, span: Span): AnalyzedExpr | SemantError {
   if (intValue <= 0x7fffffffffffffffn)
     return { tag: "intLit", value, span };
   else
-    return new SemantError(span, { errorKind: "valueError", tag: "tooLargeIntLiteral" });
+    return new SemantError(span, { tag: "literalOutOfRange" });
 }

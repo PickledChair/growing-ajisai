@@ -16,5 +16,5 @@ Deno.test("too large integer literal", () => {
   assert(!(ast instanceof SyntaxError));
   const analyzedAst = analyzeExpr(ast);
   assert(analyzedAst instanceof SemantError);
-  assertEquals(analyzedAst.errorInfo.tag, "tooLargeIntLiteral");
+  assertEquals(analyzedAst.errorInfo.tag, "literalOutOfRange");
 });

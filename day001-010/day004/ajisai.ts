@@ -1,15 +1,13 @@
-import { Command } from "jsr:@cliffy/command@^1.0.0-rc.8";
+import { Command } from "@cliffy/command";
 
 import { parse, SyntaxError } from "./parser/mod.ts";
 import { codegen } from "./codegen/mod.ts";
 
-// build コマンドのオプションはなし
-type Options = Record<string, never>;
 // build コマンドの引数: <sourceFilePath:string>
 type Arguments = [string];
 
 // サブコマンド build の処理
-function buildMain(_options: Options, ...args: Arguments) {
+function buildMain(args: Arguments) {
   // sourceFilePath の存在確認
   const [sourceFilePath] = args;
   try {
@@ -62,7 +60,7 @@ function buildMain(_options: Options, ...args: Arguments) {
 const build = new Command()
   .arguments("<source:string>")
   .description("Create executable from source files.")
-  .action(buildMain);
+  .action((_options, ...args) => buildMain(args));
 
 await new Command()
   .name("ajisai")
